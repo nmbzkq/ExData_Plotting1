@@ -1,0 +1,8 @@
+datRaw <- read.table("./coursera/data//household_power_consumption.txt", sep = ";", header = TRUE, stringsAsFactors = FALSE, na.strings = "?")
+datRaw$Date <- as.Date(datRaw$Date,"%d/%m/%Y")
+##datRaw$Time <- strptime(paste(datRaw$Date, datRaw$Time), "%Y-%m-%d %H:%M:%S")
+dfRaw <- tbl_df(datRaw)
+dfData <- filter(dfRaw, Date >= "2007-02-01", Date <= "2007-02-02")
+hist(dfData$Global_active_power, col = "red", xlab = "Global_active_power (kilowatts)", main = "Global Active Power")
+dev.copy(png, file="plot1.png", width=480, height = 480)
+dev.off()

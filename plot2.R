@@ -1,0 +1,8 @@
+Sys.setlocale(category = "LC_ALL", locale = "C")
+datRaw <- read.table("./coursera/data//household_power_consumption.txt", sep = ";", header = TRUE, stringsAsFactors = FALSE, na.strings = "?")
+datData <- subset(datRaw, Date %in% c("1/2/2007","2/2/2007"))
+datData$Date <- as.Date(datData$Date,"%d/%m/%Y")
+datData$Time <- strptime(paste(datData$Date, datData$Time), "%Y-%m-%d %H:%M:%S")
+plot(datData$Time, datData$Global_active_power,type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
+dev.copy(png, file="plot2.png", width=480, height = 480)
+dev.off()
